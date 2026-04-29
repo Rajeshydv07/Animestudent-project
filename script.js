@@ -1,75 +1,68 @@
-// script.js
+// wait for page to load
+document.addEventListener("DOMContentLoaded", function() {
+    
+    // console.log("page loaded");
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Navbar scroll effect
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
+    // fetch anime from jikan api
+    fetch("https://api.jikan.moe/v4/top/anime")
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+        let animeList = data.data;
+        // console.log(animeList);
+
+        // hide loading text
+        document.getElementById("loadingText").style.display = "none";
+        // show rows
+        document.getElementById("all-rows").style.display = "block";
+
+        // make 3 rows by slicing the array (so we dont get rate limited by api)
+        let row1_data = animeList.slice(0, 8);
+        let row2_data = animeList.slice(8, 16);
+        let row3_data = animeList.slice(16, 24);
+
+        // add data to html
+        createCards(row1_data, "row1");
+        createCards(row2_data, "row2");
+        createCards(row3_data, "row3");
+
+    })
+    .catch(function(error) {
+        console.log("Error getting api", error);
+        document.getElementById("loadingText").innerHTML = "Error loading animes. Please refresh.";
     });
 
-    // Helper delay to avoid Jikan API rate limit (3 req/sec)
-    const delay = ms => new Promise(res => setTimeout(res, ms));
-
-    // Fetch Anime Data
-    const fetchAnime = async () => {
-        try {
-            // Fetch three different categories
-            const [resTrending, resPopular, resTopRated] = await Promise.all([
-                fetch('https://api.jikan.moe/v4/seasons/now?limit=15').then(res => res.json()),
-                delay(400).then(() => fetch('https://api.jikan.moe/v4/top/anime?filter=bypopularity&limit=15').then(res => res.json())),
-                delay(800).then(() => fetch('https://api.jikan.moe/v4/top/anime?limit=15').then(res => res.json()))
-            ]);
-
-            // Hide loader
-            document.getElementById('loading').style.display = 'none';
-
-            // Show sections
-            document.getElementById('trending-section').style.display = 'block';
-            document.getElementById('popular-section').style.display = 'block';
-            document.getElementById('top-rated-section').style.display = 'block';
-
-            // Populate rows
-            populateRow('trending-row', resTrending.data);
-            populateRow('popular-row', resPopular.data);
-            populateRow('top-rated-row', resTopRated.data);
-
-        } catch (error) {
-            console.error('Error fetching anime data:', error);
-            document.getElementById('loading').innerHTML = '<p style="color: var(--text-muted); text-align: center; margin-top: 20px;">Failed to load anime data. Rate limit might be exceeded. Please try again later.</p>';
-        }
-    };
-
-    const populateRow = (rowId, animes) => {
-        const row = document.getElementById(rowId);
+    // function to loop through array and make html cards
+    function createCards(array, elementId) {
+        let rowDiv = document.getElementById(elementId);
         
-        if (!animes || animes.length === 0) return;
+        for(let i = 0; i < array.length; i++) {
+            let anime = array[i];
+            
+            // fix if title is too long
+            let title = anime.title_english;
+            if (title == null) {
+                title = anime.title;
+            }
 
-        animes.forEach(anime => {
-            // Create card element
-            const card = document.createElement('div');
-            card.classList.add('anime-card');
-            
-            // Extract data securely
-            const title = anime.title_english || anime.title;
-            const imageUrl = anime.images?.jpg?.large_image_url || anime.images?.jpg?.image_url || '';
-            const score = anime.score ? `${anime.score} Rating` : 'N/A';
-            
-            card.innerHTML = `
-                <img src="${imageUrl}" alt="${title}" loading="lazy">
-                <div class="anime-card-overlay">
-                    <div class="anime-card-title" title="${title}">${title}</div>
-                    <div class="anime-card-score"><i class="fas fa-star"></i> ${score}</div>
+            // make sure image exists so it doesnt break
+            let imgUrl = "";
+            if(anime.images && anime.images.jpg) {
+                imgUrl = anime.images.jpg.image_url;
+            }
+
+            let htmlString = `
+                <div class="card">
+                    <img src="${imgUrl}">
+                    <div class="card-title">${title}</div>
+                    <div class="score">Score: ${anime.score}</div>
                 </div>
             `;
             
-            row.appendChild(card);
-        });
-    };
+            // append to the row
+            rowDiv.innerHTML += htmlString;
+        }
+    }
 
-    // Initialize fetch
-    fetchAnime();
 });

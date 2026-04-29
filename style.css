@@ -1,388 +1,146 @@
-:root {
-    --bg-color: #0b0b0b;
-    --text-main: #ffffff;
-    --text-muted: #aaaaaa;
-    --nav-bg: rgba(11, 11, 11, 0.8);
-    --nav-bg-solid: #0b0b0b;
-    --primary-glow: rgba(255, 255, 255, 0.2);
-}
-
-* {
+/* My CSS File for Anime Website */
+body {
+    background-color: #141414;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-main);
-    overflow-x: hidden;
-}
-
-/* Navbar */
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    padding: 20px 4%;
+/* top bar styling */
+#navbar {
+    background-color: black;
+    height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0px 30px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    box-sizing: border-box; /* fixes width bug */
     z-index: 100;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%);
-    transition: background-color 0.3s ease, padding 0.3s ease;
 }
 
-.navbar.scrolled {
-    background-color: var(--nav-bg-solid);
-    padding: 15px 4%;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+#logo {
+    color: red;
+    margin: 0;
 }
 
-.nav-left {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: 800;
-    color: #e50914; /* Streaming red vibe, user asked for dark/white cinematic, let's keep it classic netflix/cinezo */
-    letter-spacing: 1px;
-    text-shadow: 0 0 15px rgba(229, 9, 20, 0.5);
-    cursor: pointer;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-.nav-links a {
+.menu a {
+    color: white;
     text-decoration: none;
-    color: var(--text-muted);
-    font-size: 14px;
-    font-weight: 600;
-    transition: color 0.3s ease;
-}
-
-.nav-links a:hover, .nav-links a.active {
-    color: var(--text-main);
-    text-shadow: 0 0 10px rgba(255,255,255,0.3);
-}
-
-.nav-right {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-.nav-icon {
-    transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.nav-icon:hover {
-    transform: scale(1.1);
-    color: var(--text-main);
-}
-
-.profile-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 5px;
-    background-color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-    transition: transform 0.3s ease;
-}
-
-.profile-icon:hover {
-    transform: scale(1.1);
-}
-
-/* Hero Section */
-.hero {
-    position: relative;
-    height: 90vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-}
-
-.hero-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Using a high quality anime background as requested (Bleach vibe) */
-    background-image: url('https://image.tmdb.org/t/p/original/9r1B3S9y2XqfE6F4B6q5P9J6E4Y.jpg'); 
-    background-size: cover;
-    background-position: center 20%;
-    z-index: 1;
-}
-
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to top, var(--bg-color) 0%, rgba(11,11,11,0.4) 50%, rgba(11,11,11,0.8) 100%),
-                linear-gradient(to right, var(--bg-color) 0%, rgba(11,11,11,0) 60%);
-    z-index: 2;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 3;
-    padding: 0 4%;
-    max-width: 600px;
-    margin-top: 100px;
-    animation: fadeIn 1s ease-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.hero-title {
-    font-size: 5rem;
-    font-weight: 800;
-    margin-bottom: 10px;
-    line-height: 1.1;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
-}
-
-.hero-meta {
-    font-size: 14px;
-    font-weight: 600;
-    color: #ddd;
-    margin-bottom: 20px;
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
-}
-
-.hero-description {
+    margin-right: 15px;
     font-size: 16px;
-    line-height: 1.5;
-    color: #eee;
-    margin-bottom: 30px;
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
 }
 
-.hero-buttons {
-    display: flex;
-    gap: 15px;
+.menu a:hover {
+    color: grey;
 }
 
-.btn {
-    padding: 12px 28px;
-    font-size: 16px;
-    font-weight: 600;
+#loginBtn {
+    background-color: red;
+    color: white;
     border: none;
-    border-radius: 6px;
+    padding: 8px 15px;
+    border-radius: 4px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: all 0.3s ease;
 }
 
-.btn-play {
+/* big header picture */
+.hero {
+    height: 500px;
+    background-image: url("https://image.tmdb.org/t/p/original/9r1B3S9y2XqfE6F4B6q5P9J6E4Y.jpg");
+    background-size: cover;
+    margin-top: 60px; /* space for navbar */
+}
+
+.dark-background {
+    background: rgba(0, 0, 0, 0.6);
+    height: 100%;
+    padding-left: 50px;
+    padding-top: 100px;
+    box-sizing: border-box;
+}
+
+.title-text {
+    font-size: 60px;
+    margin-bottom: 0px;
+}
+
+.play-button {
     background-color: white;
     color: black;
-}
-
-.btn-play:hover {
-    background-color: rgba(255,255,255,0.8);
-    transform: scale(1.05);
-}
-
-.btn-more {
-    background-color: rgba(109, 109, 110, 0.7);
-    color: white;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-}
-
-.btn-more:hover {
-    background-color: rgba(109, 109, 110, 0.4);
-    transform: scale(1.05);
-}
-
-/* Main Content & Rows */
-.main-content {
-    position: relative;
-    z-index: 4;
-    margin-top: -100px;
-    padding-bottom: 50px;
-}
-
-.anime-row-container {
-    margin-bottom: 40px;
-    padding: 0 4%;
-    opacity: 0;
-    animation: fadeInRow 1s ease-out forwards;
-}
-
-@keyframes fadeInRow {
-    to { opacity: 1; }
-}
-
-.row-title {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 15px;
-    color: #e5e5e5;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-}
-
-.anime-row {
-    display: flex;
-    gap: 15px;
-    overflow-x: auto;
-    padding-bottom: 30px; /* Space for hover scale */
-    padding-top: 10px;
-    scroll-behavior: smooth;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-}
-
-.anime-row::-webkit-scrollbar {
-    display: none;
-}
-
-/* Anime Card */
-.anime-card {
-    flex: 0 0 auto;
-    width: 200px;
-    border-radius: 8px;
-    overflow: hidden;
+    font-size: 18px;
+    padding: 10px 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
-    position: relative;
+}
+
+.play-button:hover {
+    background-color: lightgrey;
+}
+
+.info-button {
+    background-color: grey;
+    color: white;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+/* rows section */
+.main-body {
+    padding: 20px 50px;
+}
+
+.row {
+    display: flex;
+    overflow-x: scroll; /* sideways scroll */
+    padding-bottom: 20px;
+}
+
+/* hide scrollbar because it looks ugly */
+.row::-webkit-scrollbar {
+    display: none; 
+}
+
+.card {
     background-color: #222;
+    margin-right: 15px;
+    width: 180px;
+    border-radius: 5px;
+    transition: 0.2s; /* hover animation */
 }
 
-.anime-card:hover {
-    transform: scale(1.08) translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.8), 0 0 15px var(--primary-glow);
-    z-index: 5;
+.card:hover {
+    transform: scale(1.1);
+    border: 1px solid white;
 }
 
-.anime-card img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    display: block;
-    border-radius: 8px;
+.card img {
+    width: 180px;
+    height: 250px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
-.anime-card-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 40px 10px 10px;
-    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-}
-
-.anime-card:hover .anime-card-overlay {
-    opacity: 1;
-}
-
-.anime-card-title {
+.card-title {
+    padding: 10px;
     font-size: 14px;
-    font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
 
-.anime-card-score {
+.score {
+    color: green;
+    padding-left: 10px;
+    padding-bottom: 10px;
     font-size: 12px;
-    color: #46d369; /* Netflix style green match */
-    margin-top: 5px;
-    font-weight: 700;
-}
-
-/* Loading */
-.loading-spinner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 200px;
-}
-
-.spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid rgba(255,255,255,0.1);
-    border-left-color: #e50914;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    100% { transform: rotate(360deg); }
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .hero-title {
-        font-size: 3.5rem;
-    }
-    .hero-description {
-        font-size: 14px;
-        -webkit-line-clamp: 2;
-    }
-    .nav-links {
-        display: none; 
-    }
-    .anime-card {
-        width: 140px;
-    }
-    .anime-card img {
-        height: 210px;
-    }
-    .hero {
-        height: 80vh;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero-title {
-        font-size: 2.5rem;
-    }
-    .hero-content {
-        margin-top: 50px;
-    }
-    .anime-card {
-        width: 120px;
-    }
-    .anime-card img {
-        height: 180px;
-    }
-    .btn {
-        padding: 10px 20px;
-        font-size: 14px;
-    }
 }
