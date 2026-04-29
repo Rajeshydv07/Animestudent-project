@@ -1,72 +1,67 @@
 // wait for page to load
 document.addEventListener("DOMContentLoaded", function() {
     
-    // We are replacing the Jikan API with a custom premium database
-    // so we get gorgeous, high-quality, English-only posters just like Flixer.
-    
-    const premiumAnimeDatabase = [
-        // Trending
-        { title: "Jujutsu Kaisen", score: "9.8", img: "https://image.tmdb.org/t/p/w500/hFWP5HkbVEe40hrptjvfcKqcNTS.jpg" },
-        { title: "Demon Slayer", score: "9.7", img: "https://image.tmdb.org/t/p/w500/xUfRZu2mi8jH6SnCQBNWQsISCW3.jpg" },
-        { title: "Attack on Titan", score: "9.9", img: "https://image.tmdb.org/t/p/w500/8tZYtuWezp8JbcsvHYO0O46tFbo.jpg" },
-        { title: "Solo Leveling", score: "9.5", img: "https://image.tmdb.org/t/p/w500/geCRueVbVs2RkHk6sX5PUNB2q8L.jpg" },
-        { title: "Spy x Family", score: "9.2", img: "https://image.tmdb.org/t/p/w500/3r4LYGFXjAqT3PEkgFl88NIspKV.jpg" },
-        { title: "My Hero Academia", score: "8.9", img: "https://image.tmdb.org/t/p/w500/ivtRhNdA1L4E3E5j0v2xY75c1xV.jpg" },
-        { title: "One Piece", score: "9.6", img: "https://image.tmdb.org/t/p/w500/fcZNmbPIaIzw0rAIf81xO351s7V.jpg" },
-        { title: "Naruto Shippuden", score: "9.4", img: "https://image.tmdb.org/t/p/w500/zAYRe2bJxpWTVrwwmBc00VFkAfV.jpg" },
+    // We are now using the Kitsu API!
+    // Kitsu provides gorgeous, high-resolution English movie posters perfectly suited for a Flixer clone.
+
+    const trendingUrl = "https://kitsu.io/api/edge/trending/anime?limit=8";
+    const popularUrl = "https://kitsu.io/api/edge/anime?sort=-userCount&page[limit]=8";
+    const highestRatedUrl = "https://kitsu.io/api/edge/anime?sort=-averageRating&page[limit]=8";
+
+    // Fetch all 3 categories at the same time
+    Promise.all([
+        fetch(trendingUrl).then(res => res.json()),
+        fetch(popularUrl).then(res => res.json()),
+        fetch(highestRatedUrl).then(res => res.json())
+    ])
+    .then(function(results) {
+        // hide the loading text
+        document.getElementById("loadingText").style.display = "none";
         
-        // Popular Movies
-        { title: "Your Name", score: "9.9", img: "https://image.tmdb.org/t/p/w500/q719jXXEzOoYaps6babgKnONONX.jpg" },
-        { title: "Spirited Away", score: "9.8", img: "https://image.tmdb.org/t/p/w500/39wmItIWsg5sZMyRU84vtw1nSMy.jpg" },
-        { title: "A Silent Voice", score: "9.6", img: "https://image.tmdb.org/t/p/w500/drkO2g0U0s3Q1I2S6ZzB937fH9x.jpg" },
-        { title: "Jujutsu Kaisen 0", score: "9.5", img: "https://image.tmdb.org/t/p/w500/3pTwMUEavTzVOh6yLN0aEwR7uSy.jpg" },
-        { title: "Demon Slayer Movie", score: "9.7", img: "https://image.tmdb.org/t/p/w500/h8Rb9gBrCQcg1IHNvwXVKCVqwTE.jpg" },
-        { title: "Suzume", score: "9.4", img: "https://image.tmdb.org/t/p/w500/vIeu8WysZvNgpzqJxvKDr1l3wE5.jpg" },
-        { title: "Howl's Moving Castle", score: "9.5", img: "https://image.tmdb.org/t/p/w500/6pZgH10jhpnUpcgGvRkVjX4uVzO.jpg" },
-        { title: "Akira", score: "9.1", img: "https://image.tmdb.org/t/p/w500/neZ0yzNUMC64YwB6WnS10vB7Xn6.jpg" },
+        // show the rows now
+        document.getElementById("all-rows").style.display = "block";
 
-        // Top Rated
-        { title: "Death Note", score: "9.8", img: "https://image.tmdb.org/t/p/w500/tCpeqK0qA4Qz1wzV3Z200J5N9kL.jpg" },
-        { title: "Fullmetal Alchemist", score: "9.9", img: "https://image.tmdb.org/t/p/w500/5ZFHN1w6UxcW27fIavw0bB1bYIn.jpg" },
-        { title: "Cyberpunk Edgerunners", score: "9.5", img: "https://image.tmdb.org/t/p/w500/7lKIfN0Ym8pE4P0y7F0L5jC8UvL.jpg" },
-        { title: "Chainsaw Man", score: "9.4", img: "https://image.tmdb.org/t/p/w500/npdB6eFzizki0WaZ1OvKcJrWe97.jpg" },
-        { title: "Bleach", score: "9.2", img: "https://image.tmdb.org/t/p/w500/2Eewbc7HcAOXDsBML2hEaBeb2d.jpg" },
-        { title: "Hunter x Hunter", score: "9.6", img: "https://image.tmdb.org/t/p/w500/xpgx6NRAMg30pqAfZz7FGH18Dtl.jpg" },
-        { title: "Steins;Gate", score: "9.5", img: "https://image.tmdb.org/t/p/w500/pw2q2v1a9P1m0s4lqUv5P0E6M5S.jpg" },
-        { title: "Vinland Saga", score: "9.4", img: "https://image.tmdb.org/t/p/w500/uTs1bU2v1lWq1s1dO3X7h4uR5tq.jpg" }
-    ];
+        let trendingData = results[0].data;
+        let popularData = results[1].data;
+        let ratedData = results[2].data;
 
-    // hide the loading text
-    document.getElementById("loadingText").style.display = "none";
-    
-    // show the rows now
-    document.getElementById("all-rows").style.display = "block";
+        // put data into html
+        createCards(trendingData, "row1");
+        createCards(popularData, "row2");
+        createCards(ratedData, "row3");
 
-    // split into 3 rows
-    let row1_data = premiumAnimeDatabase.slice(0, 8);
-    let row2_data = premiumAnimeDatabase.slice(8, 16);
-    let row3_data = premiumAnimeDatabase.slice(16, 24);
-
-    // put data into html
-    createCards(row1_data, "row1");
-    createCards(row2_data, "row2");
-    createCards(row3_data, "row3");
-
-    setupScrollButtons();
+        setupScrollButtons();
+    })
+    .catch(function(error) {
+        console.log("error with api", error);
+        document.getElementById("loadingText").innerHTML = "Error loading animes. Please refresh.";
+    });
 
     // function to loop array and make html
     function createCards(array, elementId) {
         let rowDiv = document.getElementById(elementId);
         
         for(let i = 0; i < array.length; i++) {
-            let anime = array[i];
+            let anime = array[i].attributes;
+
+            // Kitsu has titles in english or en_jp
+            let title = anime.titles.en || anime.titles.en_jp || anime.canonicalTitle;
+            let score = anime.averageRating || "N/A";
+            
+            // Get the large, high-quality poster
+            let imgUrl = "";
+            if(anime.posterImage && anime.posterImage.large) {
+                imgUrl = anime.posterImage.large;
+            } else if (anime.posterImage && anime.posterImage.original) {
+                imgUrl = anime.posterImage.original;
+            }
 
             let htmlString = `
                 <div class="card">
-                    <img src="${anime.img}" loading="lazy">
+                    <img src="${imgUrl}" loading="lazy">
                     <div class="card-overlay">
-                        <div class="card-title">${anime.title}</div>
-                        <div class="score">Score: ${anime.score}</div>
+                        <div class="card-title">${title}</div>
+                        <div class="score">Score: ${score}</div>
                     </div>
                 </div>
             `;
@@ -129,11 +124,6 @@ document.addEventListener("DOMContentLoaded", function() {
     let heroTitle = document.querySelector(".title-text");
     let heroDesc = document.querySelector(".hero-desc");
     let heroDiv = document.querySelector(".hero");
-    
-    // Rows logic
-    let trendingRow = document.querySelector("#all-rows h2:nth-of-type(1)").parentElement;
-    let popularRow = document.querySelector("#all-rows h2:nth-of-type(2)").parentElement;
-    let originalsRow = document.querySelector("#all-rows h2:nth-of-type(3)").parentElement;
 
     for(let i=0; i < navLinks.length; i++) {
         navLinks[i].addEventListener("click", function(event) {
