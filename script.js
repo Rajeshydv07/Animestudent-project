@@ -65,4 +65,62 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    // --- DYNAMIC LOGIN MODAL ---
+    let loginBtn = document.getElementById("loginBtn");
+    let loginModal = document.getElementById("loginModal");
+    let closeBtn = document.getElementById("closeBtn");
+    let submitLogin = document.getElementById("submitLogin");
+
+    // open modal
+    loginBtn.addEventListener("click", function() {
+        loginModal.style.display = "block";
+    });
+
+    // close modal
+    closeBtn.addEventListener("click", function() {
+        loginModal.style.display = "none";
+    });
+
+    // fake login check
+    submitLogin.addEventListener("click", function() {
+        let user = document.getElementById("username").value;
+        if(user == "student") {
+            alert("Welcome back student!");
+            loginModal.style.display = "none";
+            loginBtn.innerHTML = "Logout";
+        } else {
+            document.getElementById("loginMessage").style.display = "block";
+        }
+    });
+
+    // --- DYNAMIC NAVBAR LINKS ---
+    let navLinks = document.querySelectorAll(".nav-link");
+    let heroTitle = document.querySelector(".title-text");
+
+    for(let i=0; i < navLinks.length; i++) {
+        navLinks[i].addEventListener("click", function(event) {
+            event.preventDefault(); // stop page from reloading
+            
+            // reset all colors to white
+            for(let j=0; j < navLinks.length; j++) {
+                navLinks[j].style.color = "white";
+            }
+            
+            // make clicked link red
+            this.style.color = "red";
+
+            // change hero text depending on what was clicked
+            let clickedText = this.innerHTML;
+            if(clickedText == "Home") {
+                heroTitle.innerHTML = "WELCOME HOME";
+            } else if (clickedText == "Movies") {
+                heroTitle.innerHTML = "TOP MOVIES";
+            } else if (clickedText == "TV") {
+                heroTitle.innerHTML = "TV SHOWS";
+            } else if (clickedText == "Anime") {
+                heroTitle.innerHTML = "BLEACH";
+            }
+        });
+    }
+
 });

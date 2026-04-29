@@ -144,3 +144,51 @@ body {
     padding-bottom: 10px;
     font-size: 12px;
 }
+
+/* login modal popup */
+.modal {
+    display: none; /* hidden by default */
+    position: fixed;
+    z-index: 200;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8); /* dark transparent background */
+}
+
+.modal-content {
+    background-color: #222;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid red;
+    width: 300px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.close-btn {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: red;
+}
+
+.modal-content input {
+    width: 90%;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+#submitLogin {
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
