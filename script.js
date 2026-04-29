@@ -96,6 +96,13 @@ document.addEventListener("DOMContentLoaded", function() {
     // --- DYNAMIC NAVBAR LINKS ---
     let navLinks = document.querySelectorAll(".nav-link");
     let heroTitle = document.querySelector(".title-text");
+    let heroDiv = document.querySelector(".hero");
+    let row1 = document.getElementById("row1");
+    let row2 = document.getElementById("row2");
+    let row3 = document.getElementById("row3");
+    let row1Title = document.querySelector("#all-rows h2:nth-of-type(1)");
+    let row2Title = document.querySelector("#all-rows h2:nth-of-type(2)");
+    let row3Title = document.querySelector("#all-rows h2:nth-of-type(3)");
 
     for(let i=0; i < navLinks.length; i++) {
         navLinks[i].addEventListener("click", function(event) {
@@ -109,16 +116,33 @@ document.addEventListener("DOMContentLoaded", function() {
             // make clicked link red
             this.style.color = "red";
 
-            // change hero text depending on what was clicked
+            // change hero text and background depending on what was clicked
             let clickedText = this.innerHTML;
+            
             if(clickedText == "Home") {
-                heroTitle.innerHTML = "WELCOME HOME";
+                heroTitle.innerHTML = "ANIMEFLIX HOME";
+                heroDiv.style.backgroundImage = "url('https://s4.anilist.co/file/anilistcdn/media/anime/banner/21-wf37VakJmZqs.jpg')"; // One Piece banner
+                row1.style.display = "flex"; row1Title.style.display = "block";
+                row2.style.display = "flex"; row2Title.style.display = "block";
+                row3.style.display = "flex"; row3Title.style.display = "block";
             } else if (clickedText == "Movies") {
                 heroTitle.innerHTML = "TOP MOVIES";
+                heroDiv.style.backgroundImage = "url('https://s4.anilist.co/file/anilistcdn/media/anime/banner/113415-jQ0ceO8jxgHg.jpg')"; // Jujutsu Kaisen 0 banner
+                row1.style.display = "none"; row1Title.style.display = "none";
+                row2.style.display = "flex"; row2Title.style.display = "block";
+                row3.style.display = "none"; row3Title.style.display = "none";
             } else if (clickedText == "TV") {
                 heroTitle.innerHTML = "TV SHOWS";
+                heroDiv.style.backgroundImage = "url('https://s4.anilist.co/file/anilistcdn/media/anime/banner/101922-YfZhKABiqMVp.jpg')"; // Demon Slayer banner
+                row1.style.display = "flex"; row1Title.style.display = "block";
+                row2.style.display = "none"; row2Title.style.display = "none";
+                row3.style.display = "flex"; row3Title.style.display = "block";
             } else if (clickedText == "Anime") {
                 heroTitle.innerHTML = "BLEACH";
+                heroDiv.style.backgroundImage = "url('https://s4.anilist.co/file/anilistcdn/media/anime/banner/269-KCcJAZDQqXwT.jpg')"; // Bleach banner
+                row1.style.display = "flex"; row1Title.style.display = "block";
+                row2.style.display = "flex"; row2Title.style.display = "block";
+                row3.style.display = "flex"; row3Title.style.display = "block";
             }
         });
     }

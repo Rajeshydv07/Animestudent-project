@@ -50,13 +50,16 @@ body {
 /* big header picture */
 .hero {
     height: 500px;
-    background-image: url("https://image.tmdb.org/t/p/original/9r1B3S9y2XqfE6F4B6q5P9J6E4Y.jpg");
+    background-color: #333; /* fallback color */
+    background-image: url("https://s4.anilist.co/file/anilistcdn/media/anime/banner/269-KCcJAZDQqXwT.jpg"); /* bleach banner from anilist (reliable) */
     background-size: cover;
+    background-position: center;
     margin-top: 60px; /* space for navbar */
+    transition: background-image 0.5s ease-in-out;
 }
 
 .dark-background {
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.3); /* make it brighter so we can see the image */
     height: 100%;
     padding-left: 50px;
     padding-top: 100px;
