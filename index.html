@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeFlix - Watch High Quality Anime</title>
+    <meta name="description" content="Watch the best anime online.">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-left">
+            <div class="logo">AnimeFlix</div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Movies</a></li>
+                <li><a href="#">TV</a></li>
+                <li><a href="#" class="active">Anime</a></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <i class="fas fa-search nav-icon"></i>
+            <i class="fas fa-bell nav-icon"></i>
+            <div class="profile-icon"><i class="fas fa-user"></i></div>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <header class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">BLEACH</h1>
+            <div class="hero-meta">
+                <span>Action</span> &bull; <span>Supernatural</span> &bull; <span>Shonen</span>
+            </div>
+            <p class="hero-description">High school student Ichigo Kurosaki, who has the ability to see ghosts, gains soul reaper powers from Rukia Kuchiki and sets out to save the world from "Hollows" in this epic shonen journey.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-play"><i class="fas fa-play"></i> Play</button>
+                <button class="btn btn-more"><i class="fas fa-info-circle"></i> See More</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Loading Spinner -->
+        <div id="loading" class="loading-spinner">
+            <div class="spinner"></div>
+        </div>
+
+        <!-- Anime Rows -->
+        <section class="anime-row-container" id="trending-section" style="display: none;">
+            <h2 class="row-title">Trending Anime</h2>
+            <div class="anime-row" id="trending-row">
+                <!-- Cards injected via JS -->
+            </div>
+        </section>
+
+        <section class="anime-row-container" id="popular-section" style="display: none;">
+            <h2 class="row-title">Popular Anime</h2>
+            <div class="anime-row" id="popular-row">
+                <!-- Cards injected via JS -->
+            </div>
+        </section>
+
+        <section class="anime-row-container" id="top-rated-section" style="display: none;">
+            <h2 class="row-title">Top Rated</h2>
+            <div class="anime-row" id="top-rated-row">
+                <!-- Cards injected via JS -->
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
