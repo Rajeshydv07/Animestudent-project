@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
         createCards(row2_data, "row2");
         createCards(row3_data, "row3");
 
+        setupScrollButtons();
     })
     .catch(function(error) {
         console.log("error with api", error);
@@ -39,10 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
             let anime = array[i];
             
             // fix empty titles
-            let title = anime.title_english;
-            if (title == null) {
-                title = anime.title;
-            }
+            let title = anime.title_english || anime.title;
 
             // make sure image works
             let imgUrl = "";
@@ -53,14 +51,36 @@ document.addEventListener("DOMContentLoaded", function() {
             let htmlString = `
                 <div class="card">
                     <img src="${imgUrl}">
-                    <div class="card-title">${title}</div>
-                    <div class="score">Score: ${anime.score}</div>
+                    <div class="card-overlay">
+                        <div class="card-title">${title}</div>
+                        <div class="score">Score: ${anime.score}</div>
+                    </div>
                 </div>
             `;
             
             // add to row
             rowDiv.innerHTML += htmlString;
         }
+    }
+
+    // Scroll buttons logic
+    function setupScrollButtons() {
+        let leftBtns = document.querySelectorAll(".left-btn");
+        let rightBtns = document.querySelectorAll(".right-btn");
+
+        leftBtns.forEach(btn => {
+            btn.addEventListener("click", function() {
+                let row = this.nextElementSibling;
+                row.scrollBy({ left: -400, behavior: 'smooth' });
+            });
+        });
+
+        rightBtns.forEach(btn => {
+            btn.addEventListener("click", function() {
+                let row = this.previousElementSibling;
+                row.scrollBy({ left: 400, behavior: 'smooth' });
+            });
+        });
     }
 
     // login popup logic
@@ -94,13 +114,13 @@ document.addEventListener("DOMContentLoaded", function() {
     // menu clicking logic
     let navLinks = document.querySelectorAll(".nav-link");
     let heroTitle = document.querySelector(".title-text");
+    let heroDesc = document.querySelector(".hero-desc");
     let heroDiv = document.querySelector(".hero");
-    let row1 = document.getElementById("row1");
-    let row2 = document.getElementById("row2");
-    let row3 = document.getElementById("row3");
-    let row1Title = document.querySelector("#all-rows h2:nth-of-type(1)");
-    let row2Title = document.querySelector("#all-rows h2:nth-of-type(2)");
-    let row3Title = document.querySelector("#all-rows h2:nth-of-type(3)");
+    
+    // Rows logic
+    let trendingRow = document.querySelector("#all-rows h2:nth-of-type(1)").parentElement;
+    let popularRow = document.querySelector("#all-rows h2:nth-of-type(2)").parentElement;
+    let originalsRow = document.querySelector("#all-rows h2:nth-of-type(3)").parentElement;
 
     for(let i=0; i < navLinks.length; i++) {
         navLinks[i].addEventListener("click", function(event) {
@@ -108,39 +128,33 @@ document.addEventListener("DOMContentLoaded", function() {
             
             // reset colors
             for(let j=0; j < navLinks.length; j++) {
-                navLinks[j].style.color = "white";
+                navLinks[j].style.color = "var(--text-muted)";
+                navLinks[j].style.fontWeight = "600";
             }
             
-            // color the clicked one red
-            this.style.color = "red";
+            // color the clicked one white
+            this.style.color = "white";
+            this.style.fontWeight = "bold";
 
             // change the big picture and hide rows
             let clickedText = this.innerHTML;
             
             if(clickedText == "Home") {
-                heroTitle.innerHTML = "ANIMEFLIX HOME";
+                heroTitle.innerHTML = "ONE PIECE";
+                heroDesc.innerHTML = "Monkey D. Luffy sets off on an adventure with his pirate crew in hopes of finding the greatest treasure ever left by the legendary Pirate, Gold Roger.";
                 heroDiv.style.backgroundImage = "url('https://s4.anilist.co/file/anilistcdn/media/anime/banner/21-wf37VakJmZqs.jpg')"; 
-                row1.style.display = "flex"; row1Title.style.display = "block";
-                row2.style.display = "flex"; row2Title.style.display = "block";
-                row3.style.display = "flex"; row3Title.style.display = "block";
             } else if (clickedText == "Movies") {
-                heroTitle.innerHTML = "TOP MOVIES";
+                heroTitle.innerHTML = "JUJUTSU KAISEN 0";
+                heroDesc.innerHTML = "Yuta Okkotsu, a high schooler who gains control of an extremely powerful Cursed Spirit, gets enrolled in the Tokyo Prefectural Jujutsu High School by Jujutsu Sorcerers to help him control his power.";
                 heroDiv.style.backgroundImage = "url('https://s4.anilist.co/file/anilistcdn/media/anime/banner/113415-jQ0ceO8jxgHg.jpg')"; 
-                row1.style.display = "none"; row1Title.style.display = "none";
-                row2.style.display = "flex"; row2Title.style.display = "block";
-                row3.style.display = "none"; row3Title.style.display = "none";
-            } else if (clickedText == "TV") {
-                heroTitle.innerHTML = "TV SHOWS";
+            } else if (clickedText == "TV Shows") {
+                heroTitle.innerHTML = "DEMON SLAYER";
+                heroDesc.innerHTML = "A family is attacked by demons and only two members survive - Tanjiro and his sister Nezuko, who is turning into a demon slowly.";
                 heroDiv.style.backgroundImage = "url('https://s4.anilist.co/file/anilistcdn/media/anime/banner/101922-YfZhKABiqMVp.jpg')"; 
-                row1.style.display = "flex"; row1Title.style.display = "block";
-                row2.style.display = "none"; row2Title.style.display = "none";
-                row3.style.display = "flex"; row3Title.style.display = "block";
-            } else if (clickedText == "Anime") {
+            } else if (clickedText == "Live Sports" || clickedText == "My List") {
                 heroTitle.innerHTML = "BLEACH";
+                heroDesc.innerHTML = "High school student Ichigo Kurosaki gains soul reaper powers from Rukia Kuchiki and sets out to save the world.";
                 heroDiv.style.backgroundImage = "url('https://s4.anilist.co/file/anilistcdn/media/anime/banner/269-KCcJAZDQqXwT.jpg')"; 
-                row1.style.display = "flex"; row1Title.style.display = "block";
-                row2.style.display = "flex"; row2Title.style.display = "block";
-                row3.style.display = "flex"; row3Title.style.display = "block";
             }
         });
     }

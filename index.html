@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Anime Stream - Student Project</title>
+    <title>FLIXER Clone - Student Project</title>
     <link rel="stylesheet" href="style.css">
     <!-- link to fontawesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -10,28 +10,44 @@
     
     <!-- navbar section -->
     <div id="navbar">
-        <h2 id="logo">AnimeFlix</h2>
+        <h2 id="logo">ANIMEFLIX</h2>
         <div class="menu">
             <a href="#" class="nav-link" id="nav-home">Home</a>
-            <a href="#" class="nav-link" id="nav-movies">Movies</a>
-            <a href="#" class="nav-link" id="nav-tv">TV</a>
-            <a href="#" class="nav-link" id="nav-anime" style="color: red;">Anime</a>
+            <a href="#" class="nav-link" id="nav-movies" style="color: white; font-weight: bold;">Movies</a>
+            <a href="#" class="nav-link" id="nav-tv">TV Shows</a>
+            <a href="#" class="nav-link" id="nav-list">My List</a>
+            <a href="#" class="nav-link" id="nav-sports">Live Sports</a>
         </div>
         <div class="user-stuff">
             <i class="fas fa-search"></i>
-            <button id="loginBtn">Login</button>
+            <div class="bell-container">
+                <i class="far fa-bell"></i>
+                <span class="notification-dot"></span>
+            </div>
+            <i class="far fa-user"></i>
+            <i class="fas fa-shield-alt"></i>
+            <i class="fas fa-cog"></i>
+            <i class="fas fa-globe"></i>
+            <button id="loginBtn">Sign In</button>
         </div>
     </div>
 
     <!-- main image and text -->
     <div class="hero">
         <div class="dark-background">
+            <p class="hero-quote">"Welcome to 2025. Netflix still thinks gradients are innovation."</p>
             <h1 class="title-text">BLEACH</h1>
-            <p>Action | Supernatural | Shonen</p>
-            <p style="width: 50%;">High school student Ichigo Kurosaki gains soul reaper powers from Rukia Kuchiki and sets out to save the world.</p>
-            <br>
-            <button class="play-button"><i class="fas fa-play"></i> Watch Now</button>
-            <button class="info-button">More Info</button>
+            <div class="meta-tags">
+                <span class="tag">2004</span>
+                <span class="tag">SERIES</span>
+            </div>
+            <p class="hero-desc">High school student Ichigo Kurosaki gains soul reaper powers from Rukia Kuchiki and sets out to save the world.</p>
+            <div class="hero-buttons">
+                <button class="play-button"><i class="fas fa-play"></i> Play</button>
+                <button class="info-button"><i class="fas fa-plus"></i> List</button>
+                <button class="info-button details-btn"><i class="fas fa-info-circle"></i> Details</button>
+            </div>
+            <div class="rating-badge">TV-MA</div>
         </div>
     </div>
 
@@ -42,16 +58,28 @@
 
         <div id="all-rows" style="display: none;">
             <!-- trending row -->
-            <h2>Trending Now</h2>
-            <div class="row" id="row1"></div>
+            <h2>Trending Movies</h2>
+            <div class="row-container">
+                <button class="scroll-btn left-btn"><i class="fas fa-chevron-left"></i></button>
+                <div class="row" id="row1"></div>
+                <button class="scroll-btn right-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
 
             <!-- popular row -->
-            <h2>Most Popular</h2>
-            <div class="row" id="row2"></div>
+            <h2>Top TV Shows</h2>
+            <div class="row-container">
+                <button class="scroll-btn left-btn"><i class="fas fa-chevron-left"></i></button>
+                <div class="row" id="row2"></div>
+                <button class="scroll-btn right-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
 
             <!-- top rated row -->
-            <h2>Highest Rated</h2>
-            <div class="row" id="row3"></div>
+            <h2>Anime Originals</h2>
+            <div class="row-container">
+                <button class="scroll-btn left-btn"><i class="fas fa-chevron-left"></i></button>
+                <div class="row" id="row3"></div>
+                <button class="scroll-btn right-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
         </div>
 
     </div>

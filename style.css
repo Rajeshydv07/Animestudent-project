@@ -1,11 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;800&display=swap');
 
-/* Premium CSS Upgrade */
 :root {
-    --primary-color: #e50914;
-    --bg-dark: #0f0f0f;
-    --card-bg: #1c1c1c;
-    --text-light: #f5f5f5;
+    --primary-color: #ff1c1c; /* Brighter red like Flixer */
+    --bg-dark: #000000;
+    --card-bg: #111;
+    --text-light: #ffffff;
     --text-muted: #a3a3a3;
 }
 
@@ -18,12 +17,10 @@ body {
     overflow-x: hidden;
 }
 
-/* top bar styling */
+/* NAVBAR */
 #navbar {
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    height: 70px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+    height: 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -33,36 +30,34 @@ body {
     top: 0;
     box-sizing: border-box;
     z-index: 100;
-    transition: background-color 0.3s;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 #logo {
     color: var(--primary-color);
     margin: 0;
     font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 3px;
-    font-size: 38px;
-    text-shadow: 0 2px 10px rgba(229, 9, 20, 0.4);
+    letter-spacing: 2px;
+    font-size: 32px;
 }
 
 .menu {
     display: flex;
-    gap: 25px;
+    gap: 30px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .menu a {
-    color: var(--text-light);
+    color: var(--text-muted);
     text-decoration: none;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     transition: all 0.3s ease;
-    opacity: 0.8;
 }
 
 .menu a:hover {
-    opacity: 1;
-    transform: translateY(-2px);
+    color: white;
 }
 
 .user-stuff {
@@ -72,8 +67,9 @@ body {
 }
 
 .user-stuff i {
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
+    color: var(--text-light);
     transition: color 0.3s;
 }
 
@@ -81,112 +77,156 @@ body {
     color: var(--primary-color);
 }
 
+.bell-container {
+    position: relative;
+    cursor: pointer;
+}
+.notification-dot {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 6px;
+    height: 6px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+}
+
 #loginBtn {
     background-color: var(--primary-color);
     color: white;
     border: none;
     padding: 8px 20px;
-    border-radius: 6px;
-    font-family: 'Poppins', sans-serif;
+    border-radius: 20px;
+    font-family: 'Outfit', sans-serif;
     font-weight: 600;
     font-size: 14px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(229, 9, 20, 0.3);
+    transition: background-color 0.3s;
 }
 
 #loginBtn:hover {
-    background-color: #f40612;
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(229, 9, 20, 0.5);
+    background-color: #d11010;
 }
 
-/* big header picture */
+/* HERO SECTION */
 .hero {
-    height: 70vh;
+    height: 85vh;
     min-height: 500px;
-    background-color: #111;
     background-image: url("https://s4.anilist.co/file/anilistcdn/media/anime/banner/269-KCcJAZDQqXwT.jpg");
     background-size: cover;
     background-position: center;
-    transition: background-image 0.8s ease-in-out;
     position: relative;
+    transition: background-image 0.5s ease-in-out;
 }
 
 .dark-background {
-    background: linear-gradient(90deg, rgba(15,15,15,0.95) 0%, rgba(15,15,15,0.6) 40%, rgba(15,15,15,0) 100%),
-                linear-gradient(0deg, rgba(15,15,15,1) 0%, rgba(15,15,15,0) 30%);
+    background: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%),
+                linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 30%);
     height: 100%;
     width: 100%;
-    padding-left: 5%;
+    padding-left: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     box-sizing: border-box;
+    position: relative;
+}
+
+.hero-quote {
+    font-style: italic;
+    color: #ccc;
+    font-size: 14px;
+    margin-bottom: 0px;
+    font-weight: 300;
 }
 
 .title-text {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 85px;
-    font-weight: 400;
-    margin-bottom: 5px;
-    text-shadow: 3px 3px 10px rgba(0,0,0,0.9);
-    letter-spacing: 4px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 80px;
+    font-weight: 800;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    letter-spacing: -2px;
 }
 
-.dark-background p {
-    font-size: 16px;
+.meta-tags {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tag {
+    border: 1px solid rgba(255,255,255,0.4);
+    padding: 3px 8px;
+    font-size: 11px;
+    border-radius: 2px;
+    color: #ddd;
+    font-weight: 600;
+}
+
+.hero-desc {
+    font-size: 15px;
     line-height: 1.6;
     color: #e0e0e0;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
-    max-width: 600px;
+    max-width: 500px;
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
 }
 
 .play-button {
     background-color: white;
     color: black;
     font-size: 16px;
-    padding: 12px 28px;
+    padding: 10px 25px;
     font-weight: 600;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Outfit', sans-serif;
     border: none;
-    border-radius: 6px;
+    border-radius: 4px;
     cursor: pointer;
     transition: all 0.3s ease;
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
-
-.play-button:hover {
-    background-color: rgba(255,255,255,0.8);
-    transform: scale(1.05);
-}
+.play-button:hover { background-color: #ddd; }
 
 .info-button {
-    background-color: rgba(109, 109, 110, 0.7);
+    background-color: rgba(255,255,255,0.1);
     color: white;
     font-size: 16px;
-    padding: 12px 28px;
-    font-family: 'Poppins', sans-serif;
+    padding: 10px 25px;
     font-weight: 600;
-    border: none;
-    border-radius: 6px;
+    font-family: 'Outfit', sans-serif;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 4px;
     cursor: pointer;
-    margin-left: 15px;
     transition: all 0.3s ease;
-    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.info-button:hover { background-color: rgba(255,255,255,0.2); }
+
+.rating-badge {
+    position: absolute;
+    right: 50px;
+    bottom: 80px;
+    border: 2px solid #555;
+    border-radius: 50%;
+    padding: 15px 10px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #ccc;
 }
 
-.info-button:hover {
-    background-color: rgba(109, 109, 110, 0.4);
-    transform: scale(1.05);
-}
-
-/* rows section */
+/* ROWS */
 .main-body {
-    padding: 0 4%;
-    margin-top: -30px;
+    padding: 0 50px;
+    margin-top: -50px;
     position: relative;
     z-index: 10;
 }
@@ -195,61 +235,92 @@ h2 {
     font-size: 22px;
     font-weight: 600;
     margin-bottom: 15px;
-    margin-top: 30px;
+    margin-top: 40px;
 }
+
+.row-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.scroll-btn {
+    position: absolute;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    font-size: 24px;
+    height: 100%;
+    width: 50px;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.3s;
+}
+.scroll-btn:hover {
+    background: rgba(0,0,0,0.8);
+}
+.left-btn { left: -50px; }
+.right-btn { right: -50px; }
 
 .row {
     display: flex;
     overflow-x: auto;
-    padding-bottom: 30px;
-    gap: 18px;
+    gap: 15px;
     scroll-behavior: smooth;
+    padding-bottom: 20px;
+    width: 100%;
 }
-
-.row::-webkit-scrollbar {
-    display: none; 
-}
+.row::-webkit-scrollbar { display: none; }
 
 .card {
-    background-color: var(--card-bg);
     flex: 0 0 auto;
     width: 200px;
-    border-radius: 10px;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-radius: 8px;
     cursor: pointer;
     position: relative;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
     overflow: hidden;
+    transition: transform 0.3s;
 }
-
 .card:hover {
-    transform: scale(1.07) translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+    transform: scale(1.05);
     z-index: 5;
 }
 
 .card img {
     width: 100%;
-    height: 280px;
+    height: 300px;
     object-fit: cover;
     display: block;
-    border-bottom: 2px solid var(--primary-color);
 }
 
+/* Hover overlay for english title since we removed text below */
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 15px;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.card:hover .card-overlay {
+    opacity: 1;
+}
 .card-title {
-    padding: 12px 10px 4px;
     font-size: 14px;
     font-weight: 600;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
-
 .score {
-    color: #46d369;
-    padding: 0 10px 12px;
-    font-size: 13px;
-    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 5px;
 }
 
 /* login modal popup */
@@ -317,7 +388,7 @@ h2 {
     color: white;
     border-radius: 6px;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Outfit', sans-serif;
 }
 
 .modal-content input:focus {
@@ -333,14 +404,14 @@ h2 {
     border: none;
     border-radius: 6px;
     font-weight: 600;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 15px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 #submitLogin:hover {
-    background-color: #f40612;
+    background-color: #d11010;
 }
 
 #loadingText {
@@ -348,11 +419,4 @@ h2 {
     margin-top: 50px;
     color: var(--text-muted);
     font-weight: 400;
-    animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-    0% { opacity: 0.5; }
-    50% { opacity: 1; }
-    100% { opacity: 0.5; }
 }
